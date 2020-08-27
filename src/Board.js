@@ -62,7 +62,7 @@
     },
 
 
-/*
+    /*
          _             _     _
      ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
     / __| __/ _` | '__| __| | '_ \ / _ \ '__/ _ (_)
@@ -83,10 +83,10 @@
       var count = 0;
 
       for (var i = 0; i < row.length; i++) {
-        if(row[i] === 1){
-          count++
+        if (row[i] === 1) {
+          count++;
         }
-        if(count > 1){
+        if (count > 1) {
           return true;
         }
       }
@@ -126,31 +126,29 @@
       var rows = this.get('n');
       console.log(rows);
       var count = 0;
-      for(var i = 0; i < rows; i++){
+      for (var i = 0; i < rows; i++) {
         var row = this.get(i);
-        if(row[colIndex] === 1){
+        if (row[colIndex] === 1) {
           count++;
         }
-        if(count > 1){
-          return true
-        }
+      }
+      if (count > 1) {
+        return true;
       }
       return false; // fixme
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      debugger;
       var isTrue = false;
-      for (var i = 0; i < this.get('n'); i++){
+      for (var i = 0; i < this.get('n'); i++) {
         if (isTrue) {
           return true;
         }
         var result = this.hasColConflictAt(i);
         if (result) {
           isTrue = true;
-      }
-       // fixme
+        }
       }
       return false;
     },
@@ -162,12 +160,37 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      var rows = this.get('n');
+
+      var count = 0;
+      for (var i = 0; i < rows; i++) {
+        var row = this.get(i);
+
+        if (row[majorDiagonalColumnIndexAtFirstRow] === 1 ) {
+          count++;
+          majorDiagonalColumnIndexAtFirstRow++
+        }
+      }
+      if (count > 1) {
+        return true;
+      }
+      return false;
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+      debugger;
+      var isTrue = false;
+      for (var i = 0; i < this.get('n'); i++) {
+        if (isTrue) {
+          return true;
+        }
+        var result = this.hasMajorDiagonalConflictAt(i);
+        if (result) {
+          isTrue = true;
+        }
+      }
+      return false;
     },
 
 
